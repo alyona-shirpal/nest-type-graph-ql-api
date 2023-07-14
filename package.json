@@ -5,6 +5,7 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
+  "type": "commonjs",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
@@ -27,14 +28,15 @@
     "@nestjs/platform-express": "^8.0.0",
     "@types/node": "^20.4.2",
     "apollo-server": "^3.12.0",
+    "class-validator": "^0.14.0",
+    "graphql": "15.8.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "sqlite3": "^5.1.6",
     "type-graphql": "^1.1.1",
     "typegraphql-nestjs": "^0.6.0",
-    "typeorm": "^0.3.17",
-    "graphql": "15.8.0"
+    "typeorm": "^0.3.17"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
