@@ -1,8 +1,16 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import 'reflect-metadata';
+import { createConnection } from 'typeorm';
+import { ApolloServer } from 'apollo-server';
+import { buildSchema } from 'type-graphql';
+import { BookResolver } from './resolvers/bookResolver';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+async function main() {
+  const connection = await createConnection();
+  const schema = await buildSchema({
+    resolvers: [BookResolver],
+  });
+  const server = new ApolloServer({ schema });
+  await server.listen(4000);
+  console.log('Server has started!');
 }
-bootstrap();
+main();
