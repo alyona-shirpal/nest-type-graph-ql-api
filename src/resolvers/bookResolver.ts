@@ -16,4 +16,9 @@ export class BookResolver {
     const savedBook = await book.save();
     return savedBook;
   }
+
+  @Query(() => Book)
+  book(@Arg('id') id: string) {
+    return Book.findOne({ where: { id } });
+  }
 }
