@@ -8,7 +8,6 @@ export class CreateBookInput {
   title: string;
 
   @Field()
-  @Length(3, 255)
   author: string;
 
   @Field({ nullable: true })

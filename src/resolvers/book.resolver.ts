@@ -1,7 +1,8 @@
 import { Resolver, Query, Mutation, Arg, ID } from 'type-graphql';
 import { Book } from '../models/Book';
-import { CreateBookInput } from '../inputs/CreateBookInput';
-import { UpdateBookInput } from '../inputs/UpdateBookInput';
+import { CreateBookInput } from '../inputs/book/CreateBookInput';
+import { UpdateBookInput } from '../inputs/book/UpdateBookInput';
+import { Author } from '../models/Author';
 
 @Resolver()
 export class BookResolver {
@@ -13,13 +14,26 @@ export class BookResolver {
 
   @Mutation(() => Book)
   async createBook(@Arg('data') data: CreateBookInput) {
-    const book = Book.create(data as any);
+    const book = Book.create({
+      title: data.title,
+      isPublished: data.isPublished || false,
+    });
+
+    if (data.author) {
+      const author = await Author.findOne({ where: { id: data.author } });
+      if (!author) {
+        throw new Error('Author not found');
+      }
+
+      book.author = author;
+    }
+
     const savedBook = await book.save();
     return savedBook;
   }
 
   @Query(() => Book)
-  book(@Arg('id') id: string) {
+  async book(@Arg('id') id: string) {
     return Book.findOne({ where: { id } });
   }
 

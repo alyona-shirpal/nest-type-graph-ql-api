@@ -1,6 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
 import { BaseEntity } from 'typeorm';
+import { Author } from './Author';
 
 @Entity()
 @ObjectType()
@@ -13,9 +20,10 @@ export class Book extends BaseEntity {
   @Column()
   title: string;
 
-  @Field(() => String)
-  @Column()
-  author: string;
+  @Field(() => Author)
+  @ManyToOne(() => Author, { eager: true })
+  @JoinColumn({ name: 'authorId' })
+  author: Author;
 
   @Field(() => Boolean)
   @Column({ default: false })
