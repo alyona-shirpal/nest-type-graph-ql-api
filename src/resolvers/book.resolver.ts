@@ -7,13 +7,13 @@ import { Author } from '../models/Author';
 @Resolver()
 export class BookResolver {
   @Query(() => [Book])
-  async books() {
+  async books(): Promise<Book[]> {
     const books = await Book.find();
     return books;
   }
 
   @Mutation(() => Book)
-  async createBook(@Arg('data') data: CreateBookInput) {
+  async createBook(@Arg('data') data: CreateBookInput): Promise<Book> {
     const book = Book.create({
       title: data.title,
       isPublished: data.isPublished || false,
@@ -33,7 +33,7 @@ export class BookResolver {
   }
 
   @Query(() => Book)
-  async book(@Arg('id') id: string) {
+  async book(@Arg('id') id: string): Promise<Book> {
     return Book.findOne({ where: { id } });
   }
 
@@ -41,7 +41,7 @@ export class BookResolver {
   async updateBook(
     @Arg('id', () => ID) id: string,
     @Arg('data') data: UpdateBookInput,
-  ) {
+  ): Promise<Book> {
     const book = await Book.findOne({ where: { id } });
     if (!book) throw new Error('Book not found!');
     Object.assign(book, data);
@@ -50,7 +50,7 @@ export class BookResolver {
   }
 
   @Mutation(() => Boolean)
-  async deleteBook(@Arg('id') id: string) {
+  async deleteBook(@Arg('id') id: string): Promise<boolean> {
     const book = await Book.findOne({ where: { id } });
     if (!book) throw new Error('Book not found!');
     await book.remove();

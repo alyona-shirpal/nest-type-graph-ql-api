@@ -5,14 +5,14 @@ import { CreateAuthorInput } from '../inputs/author/createAuthorInput';
 @Resolver()
 export class AuthorResolver {
   @Mutation(() => Author)
-  async createAuthor(@Arg('data') data: CreateAuthorInput) {
+  async createAuthor(@Arg('data') data: CreateAuthorInput): Promise<Author> {
     const author = Author.create(data as any);
     const saveAuthor = await author.save();
     return saveAuthor;
   }
 
-  @Query(() => Author)
-  async author(@Arg('id') id: string) {
+  @Query(() => Author, { nullable: true })
+  async author(@Arg('id') id: string): Promise<Author> {
     return Author.findOne({ where: { id } });
   }
 }
