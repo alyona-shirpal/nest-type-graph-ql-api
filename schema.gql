@@ -14,7 +14,9 @@ type Book {
   author: Author!
   id: ID!
   isPublished: Boolean!
+  ratings: [Rating!]!
   title: String!
+  users: [User!]!
 }
 
 input CreateAuthorInput {
@@ -28,9 +30,15 @@ input CreateBookInput {
   title: String!
 }
 
+input CreateUserInput {
+  username: String!
+}
+
 type Mutation {
+  addRating(bookId: Int!, userId: Int!, value: Int!): Rating!
   createAuthor(data: CreateAuthorInput!): Author!
   createBook(data: CreateBookInput!): Book!
+  createUser(data: CreateUserInput!): User!
   deleteBook(id: Float!): Boolean!
   updateBook(data: UpdateBookInput!, id: ID!): Book!
 }
@@ -42,8 +50,21 @@ type Query {
   books: [Book!]!
 }
 
+type Rating {
+  book: Book!
+  id: ID!
+  user: User!
+  value: Int!
+}
+
 input UpdateBookInput {
   authorId: String
   isPublished: Boolean
   title: String
+}
+
+type User {
+  id: ID!
+  ratings: [Rating!]!
+  username: String!
 }
