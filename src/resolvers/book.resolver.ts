@@ -8,7 +8,7 @@ import { Author } from '../models/Author';
 export class BookResolver {
   @Query(() => [Book])
   async books(): Promise<Book[]> {
-    const books = await Book.find();
+    const books = await Book.find({ relations: ['author'] });
     return books;
   }
 
@@ -19,8 +19,10 @@ export class BookResolver {
       isPublished: data.isPublished || false,
     });
 
-    if (data.author) {
-      const author = await Author.findOne({ where: { id: data.author } });
+    if (data.authorId) {
+      const author = await Author.findOne({
+        where: { id: Number(data.authorId) },
+      });
       if (!author) {
         throw new Error('Author not found');
       }
@@ -33,16 +35,16 @@ export class BookResolver {
   }
 
   @Query(() => Book)
-  async book(@Arg('id') id: string): Promise<Book> {
-    return Book.findOne({ where: { id } });
+  async book(@Arg('id') id: number): Promise<Book> {
+    return Book.findOne({ where: { id: Number(id) } });
   }
 
   @Mutation(() => Book)
   async updateBook(
-    @Arg('id', () => ID) id: string,
+    @Arg('id', () => ID) id: number,
     @Arg('data') data: UpdateBookInput,
   ): Promise<Book> {
-    const book = await Book.findOne({ where: { id } });
+    const book = await Book.findOne({ where: { id: Number(id) } });
     if (!book) throw new Error('Book not found!');
     Object.assign(book, data);
     await book.save();
@@ -50,8 +52,8 @@ export class BookResolver {
   }
 
   @Mutation(() => Boolean)
-  async deleteBook(@Arg('id') id: string): Promise<boolean> {
-    const book = await Book.findOne({ where: { id } });
+  async deleteBook(@Arg('id') id: number): Promise<boolean> {
+    const book = await Book.findOne({ where: { id: Number(id) } });
     if (!book) throw new Error('Book not found!');
     await book.remove();
     return true;

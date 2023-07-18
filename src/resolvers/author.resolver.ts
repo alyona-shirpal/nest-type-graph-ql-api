@@ -11,8 +11,14 @@ export class AuthorResolver {
     return saveAuthor;
   }
 
-  @Query(() => Author, { nullable: true })
-  async author(@Arg('id') id: string): Promise<Author> {
-    return Author.findOne({ where: { id } });
+  @Query(() => Author)
+  async author(@Arg('id') id: number): Promise<Author> {
+    return Author.findOne({ where: { id: Number(id) } });
+  }
+
+  @Query(() => [Author])
+  async authors(): Promise<Author[]> {
+    const authors = await Author.find();
+    return authors;
   }
 }
