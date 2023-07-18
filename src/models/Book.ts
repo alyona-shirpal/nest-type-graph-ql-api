@@ -14,14 +14,14 @@ import { Author } from './Author';
 export class Book extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @Field(() => String)
   @Column()
   title: string;
 
   @Field(() => Author)
-  @ManyToOne(() => Author, { eager: true })
+  @ManyToOne(() => Author, (author) => author.books)
   @JoinColumn({ name: 'authorId' })
   author: Author;
 

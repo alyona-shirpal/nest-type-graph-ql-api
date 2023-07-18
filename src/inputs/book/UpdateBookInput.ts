@@ -5,7 +5,7 @@ import { MaxLength, Length } from 'class-validator';
 export class UpdateBookInput {
   @Field({ nullable: true })
   @Length(3, 255)
-  author?: string;
+  authorId?: string;
 
   @Field({ nullable: true })
   @MaxLength(150)

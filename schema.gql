@@ -4,6 +4,7 @@
 # -----------------------------------------------
 
 type Author {
+  books: [Book!]!
   email: String!
   id: ID!
   name: String!
@@ -22,7 +23,7 @@ input CreateAuthorInput {
 }
 
 input CreateBookInput {
-  author: String!
+  authorId: Float!
   isPublished: Boolean
   title: String!
 }
@@ -30,18 +31,19 @@ input CreateBookInput {
 type Mutation {
   createAuthor(data: CreateAuthorInput!): Author!
   createBook(data: CreateBookInput!): Book!
-  deleteBook(id: String!): Boolean!
+  deleteBook(id: Float!): Boolean!
   updateBook(data: UpdateBookInput!, id: ID!): Book!
 }
 
 type Query {
-  author(id: String!): Author
-  book(id: String!): Book!
+  author(id: Float!): Author!
+  authors: [Author!]!
+  book(id: Float!): Book!
   books: [Book!]!
 }
 
 input UpdateBookInput {
-  author: String
+  authorId: String
   isPublished: Boolean
   title: String
 }
