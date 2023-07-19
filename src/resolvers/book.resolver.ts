@@ -9,6 +9,20 @@ export class BookResolver {
   @Query(() => [Book])
   async books(): Promise<Book[]> {
     const books = await Book.find({ relations: ['author'] });
+
+    for (const book of books) {
+      const ratings = await book.ratings;
+      if (ratings.length === 0) {
+        continue;
+      }
+      const totalRating = ratings.reduce(
+        (sum, rating) => sum + rating.value,
+        0,
+      );
+      const avgRating = totalRating / ratings.length;
+      book.averageRating = Math.round(avgRating * 100) / 100;
+    }
+
     return books;
   }
 
@@ -36,7 +50,27 @@ export class BookResolver {
 
   @Query(() => Book)
   async book(@Arg('id') id: number): Promise<Book> {
-    return Book.findOne({ where: { id: Number(id) } });
+    const book = await Book.findOne({
+      where: { id: Number(id) },
+      relations: ['author', 'ratings'],
+    });
+
+    if (!book) {
+      throw new Error('Book not found');
+    }
+
+    const ratings = await book.ratings;
+
+    if (ratings.length === 0) {
+      return book;
+    }
+
+    const totalRating = ratings.reduce((sum, rating) => sum + rating.value, 0);
+
+    const avgRating = totalRating / ratings.length;
+    book.averageRating = Math.round(avgRating * 100) / 100;
+
+    return book;
   }
 
   @Mutation(() => Book)

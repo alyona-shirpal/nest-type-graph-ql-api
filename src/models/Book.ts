@@ -42,4 +42,7 @@ export class Book extends BaseEntity {
   @ManyToMany(() => User, (user) => user.ratings)
   @JoinTable()
   users: Promise<User[]>;
+
+  @Field({ nullable: true })
+  averageRating?: number;
 }
