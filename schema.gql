@@ -12,6 +12,7 @@ type Author {
 
 type Book {
   author: Author!
+  averageRating: Float
   id: ID!
   isPublished: Boolean!
   ratings: [Rating!]!
