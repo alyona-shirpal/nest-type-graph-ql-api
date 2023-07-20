@@ -32,6 +32,8 @@ input CreateBookInput {
 }
 
 input CreateUserInput {
+  email: String!
+  password: String!
   username: String!
 }
 
@@ -41,6 +43,7 @@ type Mutation {
   createBook(data: CreateBookInput!): Book!
   createUser(data: CreateUserInput!): User!
   deleteBook(id: Float!): Boolean!
+  login(email: String!, password: String!): String
   updateBook(data: UpdateBookInput!, id: ID!): Book!
 }
 
@@ -65,7 +68,9 @@ input UpdateBookInput {
 }
 
 type User {
+  email: String!
   id: ID!
+  password: String!
   ratings: [Rating!]!
   username: String!
 }

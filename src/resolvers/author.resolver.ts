@@ -1,9 +1,10 @@
-import { Mutation, Resolver, Arg, Query } from 'type-graphql';
+import { Mutation, Resolver, Arg, Query, Authorized } from 'type-graphql';
 import { Author } from '../models/Author';
 import { CreateAuthorInput } from '../inputs/author/createAuthorInput';
 
 @Resolver()
 export class AuthorResolver {
+  @Authorized()
   @Mutation(() => Author)
   async createAuthor(@Arg('data') data: CreateAuthorInput): Promise<Author> {
     const author = Author.create(data as any);
