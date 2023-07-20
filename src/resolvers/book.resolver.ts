@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Arg, ID } from 'type-graphql';
+import { Resolver, Query, Mutation, Arg, ID, Authorized } from 'type-graphql';
 import { Book } from '../models/Book';
 import { CreateBookInput } from '../inputs/book/CreateBookInput';
 import { UpdateBookInput } from '../inputs/book/UpdateBookInput';
@@ -73,6 +73,7 @@ export class BookResolver {
     return book;
   }
 
+  @Authorized()
   @Mutation(() => Book)
   async updateBook(
     @Arg('id', () => ID) id: number,
@@ -85,6 +86,7 @@ export class BookResolver {
     return book;
   }
 
+  @Authorized()
   @Mutation(() => Boolean)
   async deleteBook(@Arg('id') id: number): Promise<boolean> {
     const book = await Book.findOne({ where: { id: Number(id) } });
