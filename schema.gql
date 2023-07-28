@@ -38,7 +38,7 @@ input CreateUserInput {
 }
 
 type Mutation {
-  addRating(bookId: Int!, userId: Int!, value: Int!): Rating!
+  addRating(bookId: Int!, value: Int!): Rating!
   createAuthor(data: CreateAuthorInput!): Author!
   createBook(data: CreateBookInput!): Book!
   createUser(data: CreateUserInput!): User!
