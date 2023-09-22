@@ -16,7 +16,7 @@ export const authChecker: AuthChecker<MyContext> = ({ context: { req } }) => {
   try {
     const verified = jwt.verify(token, process.env.JWT_SECRET);
 
-    if(!verified) return false
+    if (!verified) return false;
 
     return true;
   } catch (error) {
