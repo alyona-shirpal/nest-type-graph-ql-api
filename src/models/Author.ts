@@ -16,11 +16,11 @@ export class Author extends BaseEntity {
   id: number;
 
   @Field(() => String)
-  @Column()
+  @Column({ type: 'varchar' })
   name: string;
 
   @Field(() => String)
-  @Column()
+  @Column({ type: 'varchar' })
   email: string;
 
   @Field(() => [Book])
