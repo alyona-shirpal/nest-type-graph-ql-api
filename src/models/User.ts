@@ -17,7 +17,7 @@ export class User extends BaseEntity {
   id: number;
 
   @Field(() => String)
-  @Column()
+  @Column({ type: 'varchar' })
   username: string;
 
   @Field(() => String)
@@ -26,7 +26,7 @@ export class User extends BaseEntity {
   email: string;
 
   @Field(() => String)
-  @Column()
+  @Column({ type: 'varchar' })
   password: string;
 
   @Field(() => [Rating])
