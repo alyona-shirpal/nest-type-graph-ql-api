@@ -5,3 +5,5 @@ phases:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
+      - yarn install
+      - yarn build
