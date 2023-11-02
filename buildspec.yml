@@ -6,12 +6,15 @@ phases:
       nodejs: '14'
   pre_build:
     commands:
+      - echo Updating known_hosts for GitHub...
+      - ssh-keygen -f "/root/.ssh/known_hosts" -R "github.com"
       - echo Installing source NPM dependencies...
       - yarn install
   build:
     commands:
       - echo Build started on `date`
       - echo Running build...
+      - yarn install
       - yarn build
   post_build:
     commands:
