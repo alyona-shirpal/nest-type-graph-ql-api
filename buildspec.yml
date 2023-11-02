@@ -3,22 +3,21 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: '16'
+      nodejs: '14'
   pre_build:
     commands:
       - echo Installing source NPM dependencies...
-      - npm install
+      - yarn install
   build:
     commands:
       - echo Build started on `date`
       - echo Running build...
-      - npm run build
+      - yarn build
   post_build:
     commands:
       - echo Build completed on `date`
 artifacts:
   files:
     - package.json
-    - package-lock.json
-    - .npmrc
+    - yarn.lock
     - 'dist/**/*'
