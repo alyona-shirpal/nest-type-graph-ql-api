@@ -1,73 +1,67 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Book Rating API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Welcome to the Book Rating API, a NEST JS project implementing a backend API for book rating. Users can add books, describe their authors, and rate other books. The project includes user authorization and utilizes GraphQL for efficient data queries.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Getting Started
 
-## Description
+### Prerequisites
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- [Node.js](https://nodejs.org/) installed on your machine.
+- [Yarn](https://yarnpkg.com/) for managing dependencies.
 
-## Installation
+### Installation
 
-```bash
-$ npm install
-```
+1. **Clone the repository:**
 
-## Running the app
+    ```bash
+    git clone https://github.com/alyona-shirpal/nest-typegraph-ql-api.git
+    ```
 
-```bash
-# development
-$ npm run start
+2. **Navigate to the project directory:**
 
-# watch mode
-$ npm run start:dev
+    ```bash
+    cd nest-typegraph-ql-api
+    ```
 
-# production mode
-$ npm run start:prod
-```
+3. **Install dependencies:**
 
-## Test
+    ```bash
+    yarn install
+    ```
 
-```bash
-# unit tests
-$ npm run test
+### Configuration
 
-# e2e tests
-$ npm run test:e2e
+1. **Set up Environment Variables:**
 
-# test coverage
-$ npm run test:cov
-```
+   Create a `.env` file in the root of your project and configure the necessary environment variables. You might need variables for database connection, authentication, etc.
 
-## Support
+   Example `.env` file:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+    ```env
+    DB_CONNECTION=sqlite3
+    PORT=3000
+    JWT_SECRET=your_jwt_secret
+    ```
 
-## Stay in touch
+### Usage
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+1. **Start the server:**
 
-## License
+    ```bash
+    yarn start
+    ```
 
-Nest is [MIT licensed](LICENSE).
+2. **Explore the GraphQL API:**
+
+   Open your browser and navigate to `http://localhost:3000/graphql` to interact with the GraphQL playground. Here, you can execute queries and mutations to interact with the API.
+
+### User Authorization
+
+The API includes user authorization to ensure secure access to certain functionalities. Make sure to include the necessary authentication headers in your requests.
+
+
+### Contributing
+
+Feel free to contribute to the development of this project. Create a fork, make your changes, and submit a pull request.
+
+
